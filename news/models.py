@@ -1,6 +1,7 @@
 from django.db import models
 import datetime as dt
 
+
 class Editor(models.Model):
     first_name=models.CharField(max_length=30)
     last_name=models.CharField(max_length=30)
@@ -48,8 +49,15 @@ class Article(models.Model):
     def todays_news(cls):
         today=dt.date.today()
         news=cls.objects.filter(pub_date__date=today)
+
         return news 
+
     @classmethod
     def days_news(cls,date):
         news=cls.objects.filter(pub_date__date=date)
         return news 
+    
+    @classmethod
+    def search_by_title(cls, search_term):
+        news=cls.objects.filter(title__icontains=search_term)
+        return news
