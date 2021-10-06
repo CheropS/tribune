@@ -17,6 +17,10 @@ class Editor(models.Model):
     def update_first_name(self,value):
         self.first_name=value
         self.save_editor()
+        
+    def update_last_name(self,value):
+        self.last_name=value
+        self.save_editor()
 
     @staticmethod
     def show_all_editors():
