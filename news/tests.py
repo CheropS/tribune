@@ -17,3 +17,15 @@ class EditorTestClass(TestCase):
         self.sharry.save_editor()
         editors=Editor.objects.all()
         self.assertTrue(len(editors)> 0)
+
+    #deleting 
+    def test_delete_method(self):
+        self.sharry.save_editor()
+        self.sharry.delete_editor()
+        editors=self.sharry.show_all_editors()
+        self.assertTrue(len(editors) ==0)
+
+    def test_update_first_name(self):
+        self.sharry.save_editor()
+        self.sharry.update_first_name('test')
+        self.assertTrue(self.sharry.first_name=='test')

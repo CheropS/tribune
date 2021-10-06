@@ -10,6 +10,18 @@ class Editor(models.Model):
     
     def save_editor(self):
         self.save()
+
+    def delete_editor(self):
+        self.delete()
+
+    def update_first_name(self,value):
+        self.first_name=value
+        self.save_editor()
+
+    @staticmethod
+    def show_all_editors():
+        return Editor.objects.all()
+
     class Meta:
         ordering = ['first_name']
 
