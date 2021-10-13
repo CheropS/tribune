@@ -37,8 +37,9 @@
 
   <form action="{%url 'newsToday'%}" method="post">
     {%csrf_token%}
-    {{ form }}
-   
+    <input type="text">
+    <label for="Name">Name</label> <br>
+    <input type="email"><label for="email">Email</label><br>
     <input type="submit" value="Subscribe">
   </form>
 
