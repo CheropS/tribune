@@ -1,35 +1,47 @@
 {%extends 'all-news/base.html'%}
+{% load bootstrap5 %}
 
 {% block content %}
-{{block.super}}
+  {{block.super}}
 
 <div class="container">
 
-    <!-- Looping through news   -->
-    {% for news_item in articles %}
-  
-    <div class="row">
-      <!-- displaying News articles -->
-      <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-        <h2 class="text-center"> {{ news_item.title }} </h2>
-        <h4>{{ news_item.post }}</h4>
-        {{ news_item.editor }}
-      </div>
-      
+  <!-- Looping through news   -->
+  {% for news_item in articles %}
+
+  <div class="row">
+    <!-- displaying News articles -->
+    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+      <h2 class="text-center"> {{ news_item.title }} </h2>
+      <h4>{{ news_item.post }}</h4>
+      {{ news_item.editor }}
+    </div>
+
 
     <!--Display news Article images  -->
     <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
       <img src="{{news_item.article_image.url}}" class="img-responsive" alt="Image">
     </div>
 
-    </div>
-  
-    {% empty %}
-    <div class="row">
-      <h2 class="text-center">There No News Items</h2>
-    </div>
-    {% endfor %}
-  
   </div>
-  
+
+  {% empty %}
+  <div class="row">
+    <h2 class="text-center">There No News Items</h2>
+  </div>
+  {% endfor %}
+
+</div>
+<!-- Looping through news end   -->
+<div class="container-fluid">
+
+  <form action="{%url 'newsToday'%}" method="post">
+    {%csrf_token%}
+    {{ form }}
+   
+    <input type="submit" value="Subscribe">
+  </form>
+
+</div>
+
 {% endblock %}
