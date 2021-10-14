@@ -19,5 +19,6 @@ from django.conf.urls import include, url
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',include('news.urls'))
+    path('',include('news.urls')),
+    path('^accounts/', include('registration.backends.simple.urls')),
 ]
