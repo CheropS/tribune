@@ -1,6 +1,8 @@
+from django.http.response import JsonResponse
 from django.shortcuts import redirect, render
 import datetime as dt
 from django.http import HttpResponse, Http404, HttpResponseRedirect
+from django.contrib.auth.decorators import login_required
 
 from .email import send_welcome_email
 from .models import Article, NewsLetterRecipients
@@ -8,10 +10,10 @@ from .forms import NewsLetterForm
 
 
 # Create your views here.
-def news_of_day(request):
-    date=dt.date.today()
-    articles=Article.todays_news()    
-    return render(request, 'all-news/today-news.html', {"date": date, "articles":articles})
+# def news_of_day(request):
+#     date=dt.date.today()
+#     articles=Article.todays_news()    
+#     return render(request, 'all-news/today-news.html', {"date": date, "articles":articles})
 
 def past_days_news(request,past_date):
 
@@ -32,6 +34,7 @@ def past_days_news(request,past_date):
 def news_today(request):
     date=dt.date.today()
     news=Article.todays_news()
+    form=NewsLetterForm()
 
     if request.method == 'POST':
         form = NewsLetterForm(request.POST)
@@ -48,7 +51,15 @@ def news_today(request):
         form = NewsLetterForm()
     return render(request, 'all-news/today-news.html', {"date": date,"news":news,"letterForm":form})
     
-    
+def newsletter(request):
+    name=request.POST.get('your_name')
+    email=request.POST.get('email')
+
+    recipient=NewsLetterRecipients(name=name, email=email)
+    recipient.save()
+    send_welcome_email(name, email)
+    data={'success': 'You have been successfully added to the mailing list'}
+    return JsonResponse(data)    
             
     
 
@@ -65,10 +76,12 @@ def search_results(request):
         message = "You haven't searched for any term"
         return render(request, 'all-news/search.html',{"message":message})
 
+@login_required(login_url='/accounts/login/')
 def article(request, article_id):
     try:
         article=Article.objects.get(id=article_id)
     except DoesNotExist:
         raise Http404()
     return render(request, "all-news/article.html", {"article":article})
+
 

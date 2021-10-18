@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'news',
     'bootstrap5', 
-    'bootstrapform', 
+    'bootstrapform',
+    
 ]
 
 MIDDLEWARE = [

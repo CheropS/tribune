@@ -1,5 +1,6 @@
 {%extends 'all-news/base.html'%}
 {% load bootstrap5 %}
+{% load static%}
 
 {% block content %}
   {{block.super}}
@@ -30,25 +31,21 @@
     <h2 class="text-center">There No News Items</h2>
   </div>
   {% endfor %}
-
   <!-- Looping through news end   -->
 <div class="container-fluid">
 
   <form  action="{%url 'newsToday'%}" method="post">
     {%csrf_token%}
 
-    {% for field in form %}
-    {% bootstrap_field field %}
-  
-{% endfor %}
-<label for="your_name">Your name: </label>
-  <input id="your_name" type="text" name="your_name" value="{{ current_name }}"><br>
-  <label for="email">Email:</label>
-  <input type="email" value="{{ email }}">
+    {% bootstrap_form letterForm layout='inline' %}
+    
     <input type="submit" value="Subscribe">
   </form>
 
 </div>
-</div>
+{% endblock %}
 
+{% block scripts %} 
+{{block.super}}
+  <script type="text/javascript" src="{% static 'js/newsletter.js' %}"></script>
 {% endblock %}
