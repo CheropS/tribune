@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'bootstrap5', 
     'bootstrapform',
     'tinymce',
+    'rest_framework',
     
 ]
 
