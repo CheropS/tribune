@@ -2,37 +2,6 @@ from django.db import models
 import datetime as dt
 from django.contrib.auth.models import User
 
-
-# class Editor(models.Model):
-#     first_name=models.CharField(max_length=30)
-#     last_name=models.CharField(max_length=30)
-#     email=models.EmailField()
-#     phone_number=models.CharField(max_length=10, blank=True)
-
-#     def __str__(self):
-#         return self.first_name
-    
-#     def save_editor(self):
-#         self.save()
-
-#     def delete_editor(self):
-#         self.delete()
-
-#     def update_first_name(self,value):
-#         self.first_name=value
-#         self.save_editor()
-
-#     def update_last_name(self,value):
-#         self.last_name=value
-#         self.save_editor()
-
-#     @staticmethod
-#     def show_all_editors():
-#         return Editor.objects.all()
-
-#     class Meta:
-#         ordering = ['first_name']
-
 class tags(models.Model):
     name=models.CharField(max_length=30)
 
