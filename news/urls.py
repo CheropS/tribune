@@ -10,6 +10,7 @@ urlpatterns=[
     url('^search/', views.search_results, name='search_results'),
     url('^article/(\d+)',views.article,name ='article'),
     url('^ajax/newsletter/$', views.newsletter, name='newsletter'),
+    url(r'^new/article$', views.new_article, name='new-article'),
     
 
 
